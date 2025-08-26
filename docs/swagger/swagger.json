@@ -1,0 +1,283 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Travel Agency",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/register.php": {
+      "post": {
+        "summary": "User registration",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstname": { "type": "string" },
+                  "lastname": { "type": "string" },
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string", "format": "password" },
+                  "password_confirm": { "type": "string", "format": "password" }
+                },
+                "required": ["firstname", "lastname", "email", "password", "password_confirm"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registration response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login.php": {
+      "post": {
+        "summary": "User login",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string", "format": "password" }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "token": { "type": "string", "description": "JWT token or session token" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/attractions.php": {
+      "get": {
+        "summary": "Get all attractions",
+        "tags": ["Attractions"],
+        "responses": {
+          "200": {
+            "description": "List of attractions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "name": { "type": "string" },
+                      "description": { "type": "string" },
+                      "location": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/getCountries.php": {
+      "get": {
+        "summary": "Get list of countries",
+        "tags": ["Filters"],
+        "responses": {
+          "200": {
+            "description": "List of countries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "country_id": { "type": "string" },
+                      "country_name": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/getCities.php": {
+      "get": {
+        "summary": "Get cities by country ID",
+        "tags": ["Filters"],
+        "parameters": [
+          {
+            "name": "country_id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of cities for given country",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "city_id": { "type": "string" },
+                      "city": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/getFilteredAttractions.php": {
+      "get": {
+        "summary": "Get attractions with filters",
+        "tags": ["Attractions"],
+        "parameters": [
+          { "name": "name", "in": "query", "schema": { "type": "string" } },
+          { "name": "country", "in": "query", "schema": { "type": "string" } },
+          { "name": "city", "in": "query", "schema": { "type": "string" } },
+          { "name": "rating", "in": "query", "schema": { "type": "string" } },
+          { "name": "budget", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Filtered attractions list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "attraction_id": { "type": "string" },
+                          "name": { "type": "string" },
+                          "country": { "type": "string" },
+                          "city": { "type": "string" },
+                          "image_url": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/getUserTours.php": {
+      "get": {
+        "summary": "Get current user's tours",
+        "tags": ["Tours"],
+        "responses": {
+          "200": {
+            "description": "User's tours",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tour_id": { "type": "string" },
+                          "tour_name": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/addToTour.php": {
+      "post": {
+        "summary": "Add attraction to tour",
+        "tags": ["Tours"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tour_id": { "type": "string" },
+                  "attraction_id": { "type": "string" },
+                  "new_tour_name": { "type": "string" },
+                  "create_new": { "type": "string", "enum": ["1"] }
+                },
+                "required": ["attraction_id", "tour_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response after adding to tour",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

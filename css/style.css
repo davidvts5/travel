@@ -1,0 +1,36 @@
+
+.register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+.register-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+#message {
+    margin-bottom: 15px;
+}
+.rounded{
+    border-radius: 10px;
+}
+.cardcolor{
+    background-color: #f8f8f8;
+}
+.custom-margin-navbar
+{
+    margin:0 4%;
+}
+.attraction-image{
+    height:280px;
+    width: 100%;
+    object-fit: cover;
+}
+.attraction-img{
+    height:200px;
+    width: 100%;
+    object-fit: cover;
+}

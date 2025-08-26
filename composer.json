@@ -1,0 +1,8 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "*",
+        "zircote/swagger-php": "^5.1",
+        "dompdf/dompdf": "^3.1",
+        "mobiledetect/mobiledetectlib": "^4.8"
+    }
+}

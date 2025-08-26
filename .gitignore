@@ -1,0 +1,29 @@
+# Node / React Native
+node_modules/
+.expo/
+.expo-shared/
+*.log
+*.lock
+
+# Build / Output
+dist/
+build/
+*.apk
+*.ipa
+
+# Config / Env
+.env
+config/config.php
+config/db_config.php
+config/email_config.php
+
+/images/
+
+# Composer / Vendor
+vendor/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
